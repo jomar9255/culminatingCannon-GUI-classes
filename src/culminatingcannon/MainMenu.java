@@ -5,18 +5,25 @@
  */
 
 package culminatingcannon;
-
+import javax.swing.JTextField;
 /**
  *
  * @author jomar9255
- */
+ */ 
 public class MainMenu extends javax.swing.JFrame {
-
+    JTextField[] varFields;//stores the JTextFields where the user enters their known variables
+    MenuHelper tools = new MenuHelper();
     /**
      * Creates new form MainMenu
      */
     public MainMenu() {
         initComponents();
+        varFields = new JTextField[3];
+        varFields[0] = varField1;
+        varFields[1] = varField2;
+        varFields[2] = varField3;
+    
+        tools.disableJTextFields(varFields,3);//all JTextFields within the array are setEnabled(false).
     }
 
     /**
@@ -29,16 +36,14 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         solveButton = new javax.swing.JButton();
-        solveFor = new javax.swing.JTextField();
-        inField = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        solveFor1 = new javax.swing.JTextField();
-        solveFor2 = new javax.swing.JTextField();
-        solveFor3 = new javax.swing.JTextField();
-        solveFor4 = new javax.swing.JTextField();
+        solutionsBox = new javax.swing.JComboBox();
         xVarSelect = new javax.swing.JComboBox();
+        varField1 = new javax.swing.JTextField();
+        varField2 = new javax.swing.JTextField();
+        varField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         solveButton.setText("Solve");
         solveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -47,10 +52,11 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Wiwi", "chips", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        solutionsBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { }));
+        solutionsBox.setEnabled(false);
+        solutionsBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                solutionsBoxActionPerformed(evt);
             }
         });
 
@@ -66,52 +72,36 @@ public class MainMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(solveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(solveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(solveFor3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(solveFor4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(solveFor1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(solveFor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(inField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(solveFor2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(varField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                         .addComponent(xVarSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(solutionsBox, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(varField2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(varField3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(solveFor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(solveFor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(solveFor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1)
-                        .addComponent(xVarSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(solveFor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(solveFor4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                    .addComponent(solutionsBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xVarSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(varField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(varField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(varField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addComponent(solveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -120,41 +110,73 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void solveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveButtonActionPerformed
+        String xVar = tools.getSelectedJComboBoxItem(xVarSelect);
+        //decisionMaker dm = new decisionMaker();
         
     }//GEN-LAST:event_solveButtonActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+ 
+    private void solutionsBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solutionsBoxActionPerformed
+        String var = tools.getSelectedJComboBoxItem(xVarSelect);
+        String item = tools.getSelectedJComboBoxItem(solutionsBox);
+        
+        /*
+        the below switch enables the appropriate text fields based on the
+        variable requirements of a given formula
+        */
+        switch(var)
+        {
+            case "v1":
+                tools.v1SetVars(varFields, item);
+                break;
+            
+            case "v1x":
+                tools.v1xSetVars(varFields, item);
+                break;
+            
+            case "v1y":
+                tools.v1ySetVars(varFields, item);
+                break;
+            case "v2":
+                tools.v2SetVars(varFields, item);
+                break;
+                
+            case "v2y":
+                tools.v2ySetVars(varFields, item);
+                break;
+                 
+            case "dx":
+                tools.dxSetVars(varFields, item);
+                break;
+                
+            case "dy":
+                tools.dySetVars(varFields, item);
+                break;
+                 
+            case "t":
+                tools.tSetVars(varFields, item);
+                break;
+                
+            case "a":
+                tools.aSetVars(varFields, item);
+                break;
+                
+            case "theta1":
+                tools.theta1SetVars(varFields, item);
+                break;
+                
+            case "theta2":
+                tools.theta2SetVars(varFields, item);
+                break;
+                
+        }       
+        
+    }//GEN-LAST:event_solutionsBoxActionPerformed
 
     private void xVarSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xVarSelectActionPerformed
-        Object o = xVarSelect.getModel().getSelectedItem();
-        
-        if( o == "v1"){
-        
-        } else if(o == "v1x"){
-            
-        } else if(o == "v1y"){
-            
-        } else if(o == "v2"){
-
-        } else if(o == "v2y"){
-            
-        } else if(o == "dx"){
-        
-        } else if(o == "dy"){ 
-            
-        } else if(o == "t"){
-            
-        } else if(o == "a"){
-            
-        } else if(o == "theta1"){
-            
-        } else if(o == "theta2"){
-            
-        } else { //condition should never be evaluated
+        Object o = xVarSelect.getModel().getSelectedItem(); 
+        tools.getSolution(solutionsBox, o.toString());
+        solutionsBox.setEnabled(true);
          
-        }    
     }//GEN-LAST:event_xVarSelectActionPerformed
 
     /**
@@ -192,25 +214,15 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
     }
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField inField;
-    private javax.swing.JComboBox jComboBox1;
+    public javax.swing.JComboBox solutionsBox;
     private javax.swing.JButton solveButton;
-    private javax.swing.JTextField solveFor;
-    private javax.swing.JTextField solveFor1;
-    private javax.swing.JTextField solveFor2;
-    private javax.swing.JTextField solveFor3;
-    private javax.swing.JTextField solveFor4;
+    private javax.swing.JTextField varField1;
+    private javax.swing.JTextField varField2;
+    private javax.swing.JTextField varField3;
     private javax.swing.JComboBox xVarSelect;
     // End of variables declaration//GEN-END:variables
-    
-    /**
-     * getXVar gets the String from the solveFor JField. 
-     * @return 
-     */
-    private String getXVar(){
-        String x = solveFor.getText();
-        return x;
-    }
+   
+
 }
